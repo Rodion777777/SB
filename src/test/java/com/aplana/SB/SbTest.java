@@ -73,51 +73,6 @@ public class SbTest {
         assertEquals("ежемесячный платеж не совпадает", "18 937 ₽", buyingPage.getMonthlyPayment());
         assertEquals("необходимый доход не совпадает", "31 561 ₽", buyingPage.getRequiredIncome());
         assertEquals("процентная ставка не совпадает", "11%", buyingPage.getRate());
-
-
-
-
-
-
-
-
-
-
-
-//        mainPage.sendMessage("playstation");
-//        WebDriverWait wait = new WebDriverWait(driver, 4, 500);
-//        ResultsPage resultsPage = new ResultsPage();
-//        resultsPage.chooseProduct("PlayStation 4 Slim Black 1 TB");
-//        ProductCard productCard = new ProductCard();
-//        productCard.savePriceOfCurrentProduct("playstation");
-//        productCard.selectWarranty1("2 года");
-//        productCard.savePriceOfCurrentProduct("playstation");
-//        productCard.buyButtonClick();
-//        mainPage.sendMessage("Detroit\n");
-//        productCard.savePriceOfCurrentProduct("game");
-//        productCard.buyButtonClick();
-//        wait.until(mainPage.valueChanged);
-//        assertEquals("цена корзины не  равна сумме покупок", Trash.summa(), mainPage.getTotalPrice());
-//        mainPage.goToBasket();
-//        BasketPage basketPage = new BasketPage();
-//        assertEquals("для приставки не выбрана гарантия на 2 года", true, basketPage.checkWarranty());
-//        assertEquals("цена приставки не совпадает ", 21999, basketPage.getPriceOfProductFromSite());
-//        assertEquals("цена игры не совпадает", Integer.parseInt(Trash.get("game")), basketPage.getPriceOfGame());
-//        assertEquals("цена корзины не  равна сумме покупок", Trash.summa(), basketPage.getFullPrice());
-//        basketPage.doRemoveGame();
-//        wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//a[.='Игра  Detroit: Стать человеком (PS4)']"), 0));
-//        assertEquals("Detroit всё ещё в корзине", true, basketPage.isGameFalse());
-//        assertEquals("сумма уменьшилась на цену Detroit", Integer.parseInt(Trash.get("game")), Trash.summa()-Integer.parseInt(Trash.get("playstation")));
-//        basketPage.clickPlusButton();
-//        wait.until(mainPage.valueChanged2PS);
-//        basketPage.clickPlusButton();
-//        wait.until(mainPage.valueChanged3PS);
-//        assertEquals("сумма не равная трем PS", Integer.parseInt(Trash.get("playstation"))*3, mainPage.getTotalPrice());
-//        basketPage.clickBackButton();
-//        wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//a[.='Игра  Detroit: Стать человеком (PS4)']"), 1));
-//        wait.until(mainPage.valueChanged3PSAndGame);
-//        assertEquals("Detroit нет в корзине", false, basketPage.isGameFalse());
-//        assertEquals("сумма не увеличиласть на стоимость Detroit", Integer.parseInt(Trash.get("playstation"))*3+Integer.parseInt(Trash.get("game")), mainPage.getTotalPrice());
     }
 //    @After
 //    public void tearDown() throws Exception {

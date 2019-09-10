@@ -27,9 +27,10 @@ public class BuyingCompleteHousePage extends BasePage {
     public String getMonthlyPayment() {
         return monthlyPayment.getText();
     }
-    @FindBy (xpath = "//div[contains(@class, 'discounts')]//label[contains(@class, 'switch_checked')]")
 
+    @FindBy (xpath = "//div[contains(@class, 'discounts')]//label[contains(@class, 'switch_checked')]")
     WebElement salaryCardSwitch;
+
     @FindBy(xpath = "//div[@class='dcCalc_frame__discounts']/div[5]//span[@class='dcCalc_switch__control']")
     WebElement family;
 
