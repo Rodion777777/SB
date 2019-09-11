@@ -74,9 +74,9 @@ public class SbTest {
         assertEquals("необходимый доход не совпадает", "31 561 ₽", buyingPage.getRequiredIncome());
         assertEquals("процентная ставка не совпадает", "11%", buyingPage.getRate());
     }
-//    @After
-//    public void tearDown() throws Exception {
-//        driver.quit();
-//    }
+    @After
+    public void tearDown() throws Exception {
+        driver.quit();
+    }
 }
 
