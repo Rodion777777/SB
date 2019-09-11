@@ -1,22 +1,26 @@
 package pages;
 
-import com.google.common.base.Function;
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Locatable;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.function.Function;
 
 public class BuyingCompleteHousePage extends BasePage {
     @FindBy(xpath = "//input[@id='estateCost']")
+    private
     WebElement estateCostElement;
 
 
     @FindBy(xpath = "//input[@id='initialFee']")
+    private
     WebElement initialFee;
 
     @FindBy(xpath = "//input[@id='creditTerm']")
+    private
     WebElement creditItem;
 
 
@@ -29,12 +33,15 @@ public class BuyingCompleteHousePage extends BasePage {
     }
 
     @FindBy (xpath = "//div[contains(@class, 'discounts')]//label[contains(@class, 'switch_checked')]")
+    private
     WebElement salaryCardSwitch;
 
     @FindBy(xpath = "//div[@class='dcCalc_frame__discounts']/div[5]//span[@class='dcCalc_switch__control']")
+    private
     WebElement family;
 
     @FindBy(xpath = "//div[@class='dcCalc_frame__discounts']/div[3]//span[@class='dcCalc_switch__control']")
+    private
     WebElement incomeStatement;
 
     @FindBy(xpath = "//span[@data-test-id='rate']")
@@ -59,6 +66,8 @@ public class BuyingCompleteHousePage extends BasePage {
     }
 
     public void goToFrameAndSelectValues(String str, String str1, String str2){
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        jse.executeScript("window.scrollBy(0,500)");
         WebDriverWait wait = new WebDriverWait(driver, 4, 2000);
         driver.switchTo().frame("iFrameResizer0");
         estateCostElement.clear();
@@ -68,7 +77,7 @@ public class BuyingCompleteHousePage extends BasePage {
             public Boolean apply(WebDriver webDriver) {
                 String expectedPrice = "47 315 ₽";
                 String actualPrice = monthlyPayment.getText();
-                if((expectedPrice.equals(actualPrice)!=true)){
+                if((!expectedPrice.equals(actualPrice))){
                     estateCostElement.clear();
                     estateCostElement.sendKeys(str);
                 }
@@ -86,7 +95,7 @@ public class BuyingCompleteHousePage extends BasePage {
             public Boolean apply(WebDriver webDriver) {
                 String expectedPrice = "22 545 ₽";
                 String actualPrice = monthlyPayment.getText();
-                if((expectedPrice.equals(actualPrice)!=true)){
+                if((!expectedPrice.equals(actualPrice))){
                     initialFee.clear();
                     initialFee.sendKeys(str1);
                 }
@@ -101,7 +110,7 @@ public class BuyingCompleteHousePage extends BasePage {
             public Boolean apply(WebDriver webDriver) {
                 String expectedPrice = "18 310 ₽";
                 String actualPrice = monthlyPayment.getText();
-                if((expectedPrice.equals(actualPrice)!=true)){
+                if((!expectedPrice.equals(actualPrice))){
                     creditItem.clear();
                     creditItem.sendKeys(str2);
                 }
@@ -112,7 +121,7 @@ public class BuyingCompleteHousePage extends BasePage {
         wait.until(checkEstateCostElement2);
 
         driver.switchTo().defaultContent();
-        JavascriptExecutor jse = (JavascriptExecutor)driver;
+
         jse.executeScript("window.scrollBy(0,350)");
 
 
