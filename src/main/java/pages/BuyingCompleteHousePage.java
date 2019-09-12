@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,10 +10,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.function.Function;
 
+import static junit.framework.TestCase.assertEquals;
+
 public class BuyingCompleteHousePage extends BasePage {
     @FindBy(xpath = "//input[@id='estateCost']")
     private
-    WebElement estateCostElement;
+    WebElement estateCost;
 
 
     @FindBy(xpath = "//input[@id='initialFee']")
@@ -65,46 +68,59 @@ public class BuyingCompleteHousePage extends BasePage {
         return requiredIncome.getText();
     }
 
-    public void goToFrameAndSelectValues(String str, String str1, String str2){
-        JavascriptExecutor jse = (JavascriptExecutor)driver;
+    @Step("ввод стоимости недвижимости {estateCostValue}")
+    public void setEstateCost(String estateCostValue) {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,500)");
         WebDriverWait wait = new WebDriverWait(driver, 4, 2000);
         driver.switchTo().frame("iFrameResizer0");
-        estateCostElement.clear();
-        estateCostElement.sendKeys(str);
+        estateCost.clear();
+        estateCost.sendKeys(estateCostValue);
         Function<? super WebDriver, Object> checkEstateCostElement = new ExpectedCondition<Object>() {
             @Override
             public Boolean apply(WebDriver webDriver) {
                 String expectedPrice = "47 315 ₽";
                 String actualPrice = monthlyPayment.getText();
-                if((!expectedPrice.equals(actualPrice))){
-                    estateCostElement.clear();
-                    estateCostElement.sendKeys(str);
+                if ((!expectedPrice.equals(actualPrice))) {
+                    estateCost.clear();
+                    estateCost.sendKeys(estateCostValue);
                 }
                 return (expectedPrice.equals(actualPrice));
 
             }
         };
 
+
         wait.until(checkEstateCostElement);
+    }
+
+    @Step("ввод первоначального взноса {initialFeeValue}")
+    public void setInitialFee(String initialFeeValue) {
+        WebDriverWait wait = new WebDriverWait(driver, 4, 2000);
         initialFee.clear();
-        initialFee.sendKeys(str1);
+        initialFee.sendKeys(initialFeeValue);
 
         Function<? super WebDriver, Object> checkEstateCostElement1 = new ExpectedCondition<Object>() {
             @Override
             public Boolean apply(WebDriver webDriver) {
                 String expectedPrice = "22 545 ₽";
                 String actualPrice = monthlyPayment.getText();
-                if((!expectedPrice.equals(actualPrice))){
+                if ((!expectedPrice.equals(actualPrice))) {
                     initialFee.clear();
-                    initialFee.sendKeys(str1);
+                    initialFee.sendKeys(initialFeeValue);
                 }
                 return (expectedPrice.equals(actualPrice));
             }
         };
+
         wait.until(checkEstateCostElement1);
+    }
+
+    @Step("ввод срока кредита {creditItemValue}")
+    public void setCreditItem(String creditItemValue){
+        WebDriverWait wait = new WebDriverWait(driver, 4, 2000);
         creditItem.clear();
-        creditItem.sendKeys(str2);
+        creditItem.sendKeys(creditItemValue);
         Function<? super WebDriver, Object> checkEstateCostElement2 = new ExpectedCondition<Object>() {
             @Override
             public Boolean apply(WebDriver webDriver) {
@@ -112,34 +128,58 @@ public class BuyingCompleteHousePage extends BasePage {
                 String actualPrice = monthlyPayment.getText();
                 if((!expectedPrice.equals(actualPrice))){
                     creditItem.clear();
-                    creditItem.sendKeys(str2);
+                    creditItem.sendKeys(creditItemValue);
                 }
                 return (expectedPrice.equals(actualPrice));
             }
         };
-
         wait.until(checkEstateCostElement2);
+    }
 
+    @Step("клик по зарплатной карте")
+    public void clickSalaryCard() {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
         driver.switchTo().defaultContent();
-
         jse.executeScript("window.scrollBy(0,350)");
-
-
         driver.switchTo().frame("iFrameResizer0");
-
         salaryCardSwitch.click();
+    }
+
+    @Step("клик по справке о доходах")
+    public void clickIncomeStatement(){
         incomeStatement.click();
         driver.switchTo().defaultContent();
+    }
 
-
+    @Step("клик по молодой семье")
+    public void clickFamily() {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,150)");
-
         driver.switchTo().frame("iFrameResizer0");
         family.click();
-
         driver.switchTo().defaultContent();
         jse.executeScript("window.scrollBy(0,-500)");
         driver.switchTo().frame("iFrameResizer0");
+    }
+
+    @Step("сравнение стоимости недвижимости")
+    public void assertAmountOfCredit(String amountOfCreditValue){
+        assertEquals("сумма кредита не совпадает", amountOfCreditValue, getAmountOfCredit());
+    }
+
+    @Step("сравнение ежемесячного платежа")
+    public void assertMonthlyPayment(String monthlyPaymentValue){
+        assertEquals("ежемесячный платеж не совпадает", monthlyPaymentValue, getMonthlyPayment());
+    }
+
+    @Step("сравнение необходимого дохода")
+    public void assertRequiredIncome(String requiredIncomePaymentValue){
+        assertEquals("необходимый доход не совпадает", requiredIncomePaymentValue, getRequiredIncome());
+    }
+
+    @Step("сравнение процентной ставки")
+    public void assertRate(String rateValue){
+        assertEquals("процентная ставка не совпадает", rateValue, getRate());
     }
 
 }

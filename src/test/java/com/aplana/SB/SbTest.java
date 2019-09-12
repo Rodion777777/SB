@@ -32,17 +32,12 @@ https://www.sberbank.ru
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.*;
+import pages.BuyingCompleteHousePage;
+import pages.MainPage;
 
 import java.util.concurrent.TimeUnit;
-
-import static junit.framework.TestCase.assertEquals;
 
 public class SbTest {
     WebDriver driver;
@@ -67,12 +62,16 @@ public class SbTest {
 
 
         BuyingCompleteHousePage buyingPage = new BuyingCompleteHousePage();
-
-        buyingPage.goToFrameAndSelectValues("5180000","3058000","30");
-        assertEquals("сумма кредита не совпадает", "2 122 000 ₽", buyingPage.getAmountOfCredit());
-        assertEquals("ежемесячный платеж не совпадает", "18 937 ₽", buyingPage.getMonthlyPayment());
-        assertEquals("необходимый доход не совпадает", "31 561 ₽", buyingPage.getRequiredIncome());
-        assertEquals("процентная ставка не совпадает", "11%", buyingPage.getRate());
+        buyingPage.setEstateCost("5180000");
+        buyingPage.setInitialFee("3058000");
+        buyingPage.setCreditItem("30");
+        buyingPage.clickSalaryCard();
+        buyingPage.clickIncomeStatement();
+        buyingPage.clickFamily();
+        buyingPage.assertAmountOfCredit("2 122 000 ₽");
+        buyingPage.assertMonthlyPayment("18 937 ₽");
+        buyingPage.assertRequiredIncome("31 561 ₽");
+        buyingPage.assertRate("11%");
     }
     @After
     public void tearDown() throws Exception {
