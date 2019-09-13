@@ -1,8 +1,11 @@
 package com.aplana.SBCucumber;
 
+import io.cucumber.core.api.Scenario;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.BuyingCompleteHousePage;
@@ -11,6 +14,7 @@ import pages.MainPage;
 import java.util.concurrent.TimeUnit;
 
 public class Steps {
+
     MainPage mainPage = new MainPage();
     BuyingCompleteHousePage buyingPage = new BuyingCompleteHousePage();
 
@@ -82,6 +86,22 @@ public class Steps {
 
         Trash.getDriver().quit();
     }
+//    @Attachment(type = "image/png", value = "Screenshot")
+//    public static byte[] takeScreenshot() {
+//        return ((TakesScreenshot) Trash.getDriver()).getScreenshotAs(OutputType.BYTES);
+//    }
+    public void embedScreenshot(Scenario scenario) {
+    if (scenario.isFailed()) {
+        try {
+            byte[] screenshot = ((TakesScreenshot) Trash.getDriver())
+                    .getScreenshotAs(OutputType.BYTES);
+            scenario.embed(screenshot, "image/png");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
 
 
 }

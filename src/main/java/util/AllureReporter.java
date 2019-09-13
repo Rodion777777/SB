@@ -1,12 +1,12 @@
 //package util;
-//
 //import gherkin.formatter.model.Result;
+//import cucumber.api.Result;
+//import io.qameta.allure.Allure;
 //import org.openqa.selenium.OutputType;
 //import org.openqa.selenium.TakesScreenshot;
-//import ru.yandex.qatools.allure.Allure;
 //import ru.yandex.qatools.allure.events.MakeAttachmentEvent;
 //
-//import static ru.tinkoff.autotests.steps.BaseSteps.getDriver;
+//import static com.aplana.SBCucumber.Trash.getDriver;
 //
 //
 ///**
