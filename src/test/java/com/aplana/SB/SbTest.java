@@ -29,6 +29,8 @@ https://www.sberbank.ru
 для "навестись" ну и вообще поэкспериментировать)*/
 
 
+import com.aplana.SBCucumber.TestProperties;
+import com.aplana.SBCucumber.Trash;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -73,9 +75,12 @@ public class SbTest {
         buyingPage.assertRequiredIncome("31 561 ₽");
         buyingPage.assertRate("11%");
     }
-    @After
-    public void tearDown() throws Exception {
-        driver.quit();
-    }
+
+
+  @After
+  public void tearDown() throws Exception {
+      driver.quit();
+  }
+
 }
 

@@ -1,5 +1,6 @@
-package com.aplana.SB;
+package com.aplana.SBCucumber;
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
@@ -17,52 +18,52 @@ public class Steps {
     public void openMain(){
     }
     @When("навести курсор на значок ипотеки")
-    public void getTheButton(){
-        mainPage.actionToButton();
+    public void actionToButton(){
+        new MainPage().actionToButton();
     }
     @When("кликнуть по рассчитать стоимость ипотеки для готовой квартиры")
-    public void clButtonCompleteHouseElement(){
-        mainPage.clickButtonCompleteHouseElement();
+    public void clickButtonCompleteHouseElement(){
+        new MainPage().clickButtonCompleteHouseElement();
     }
     @When("ввести стоимоcть недвижимости(.*)")
-    public void setCost(String str){
-        buyingPage.setEstateCost(str);
+    public void setEstateCost(String str){
+        new BuyingCompleteHousePage().setEstateCost(str);
     }
     @When("ввести первоначальный взнос(.*)")
-    public void setFee(String str){
-        buyingPage.setInitialFee(str);
+    public void setInitialFee(String str){
+        new BuyingCompleteHousePage().setInitialFee(str);
     }
     @When("ввести срок кредита(.*)")
-    public void setItem(String str){
-        buyingPage.setCreditItem(str);
+    public void setCreditItem(String str){
+        new BuyingCompleteHousePage().setCreditItem(str);
     }
     @When("кликнуть по переключателю является участником зарплатного проекта")
-    public void clSalaryCard(){
-        buyingPage.clickSalaryCard();
+    public void clickSalaryCard(){
+        new BuyingCompleteHousePage().clickSalaryCard();
     }
     @When("кликнуть по переключателю могу подтвердить доход справкой")
-    public void clIncomeStatement(){
-        buyingPage.clickIncomeStatement();
+    public void clickIncomeStatement(){
+        new BuyingCompleteHousePage().clickIncomeStatement();
     }
     @When("кликнуть по переключателю молодая семья")
-    public void clFamily(){
-        buyingPage.clickFamily();
+    public void clickFamily(){
+        new BuyingCompleteHousePage().clickFamily();
     }
-    @When("проверить сумму кредита(.*)")
-    public void checkAmountOfCredit(String str){
-        buyingPage.assertAmountOfCredit(str);
+    @When("проверить сумму кредита (.*)")
+    public void assertAmountOfCredit(String str){
+        new BuyingCompleteHousePage().assertAmountOfCredit(str);
     }
-    @When("проверить ежемесячный платеж(.*)")
+    @When("проверить ежемесячный платеж (.*)")
     public void checkMonthlyPayment(String str){
-        buyingPage.assertMonthlyPayment(str);
+        new BuyingCompleteHousePage().assertMonthlyPayment(str);
     }
-    @When("проверить необходимый доход(.*)")
-    public void checkRequiredIncome(String str){
-        buyingPage.assertRequiredIncome(str);
+    @When("проверить необходимый доход (.*)")
+    public void assertRequiredIncome(String str){
+        new BuyingCompleteHousePage().assertRequiredIncome(str);
     }
-    @When("проверить срок кредита(.*)")
-    public void checkRate(String str){
-        buyingPage.assertRate(str);
+    @When("проверить срок кредита (.*)")
+    public void assertRate(String str){
+        new BuyingCompleteHousePage().assertRate(str);
     }
 
     @Before
@@ -74,6 +75,12 @@ public class Steps {
         driver.get(TestProperties.getInstance().getProperty("url"));
         driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
         Trash.driver = driver;
+    }
+
+    @After
+    public void tearDown() throws Exception {
+
+        Trash.getDriver().quit();
     }
 
 

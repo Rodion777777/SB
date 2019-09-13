@@ -1,4 +1,4 @@
-package com.aplana.SB;
+package com.aplana.SBCucumber;
 
 import java.io.File;
 import java.io.FileInputStream;

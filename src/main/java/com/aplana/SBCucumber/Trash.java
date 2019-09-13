@@ -1,4 +1,4 @@
-package com.aplana.SB;
+package com.aplana.SBCucumber;
 
 import org.openqa.selenium.WebDriver;
 
@@ -13,7 +13,9 @@ public class Trash {
     public static String get(String key){
         return map.get(key);
     }
-
+    public static WebDriver getDriver(){
+        return driver;
+    }
     public static void put(String key, String value){
         map.put(key, value);
     }

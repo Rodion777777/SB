@@ -1,7 +1,7 @@
 package pages;
 
 
-import com.aplana.SB.Trash;
+import com.aplana.SBCucumber.Trash;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 

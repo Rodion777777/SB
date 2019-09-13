@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/resources/features",
-        glue = "com.aplana.SB",
-        tags = "@all")
+        glue = "com.aplana.SBCucumber",
+        tags = "@test1")
 public class CucumberRunner {
 }
